@@ -18,7 +18,8 @@ builder.Host.UseSerilog((context, configuration) =>
 });
 
 //Add SqlLite DB service
-builder.Services.AddScoped<DriverDbContext>(_ => new DriverDbContext(builder.Configuration.GetConnectionString("DefaultConnection")!));
+builder.Services.AddScoped<DriverDbContext>(_ => new DriverDbContext(builder.Configuration.GetConnectionString("DefaultConnection")!,
+    builder.Configuration.GetValue<string>("DbScript")!));
 
 //Add Services
 builder.Services.AddScoped<IDriverRepository<Driver>,DriverRepository<Driver>>();

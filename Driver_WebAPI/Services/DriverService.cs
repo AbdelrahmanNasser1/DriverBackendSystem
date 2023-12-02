@@ -118,10 +118,10 @@ public class DriverService : IDriverService
         _logger.LogInformation("Get all drivers sorted...");
         var drivers = _driverRepo.GetAll();
 
-        drivers.OrderBy(d => d.LastName).ThenBy(d => d.FirstName);
+        var sortedDrivers = drivers.OrderBy(d => d.FirstName).ThenBy(keySelector: d => d.LastName);
 
-        _logger.LogInformation($"retrieve all drivers successfully and their count are : {drivers.Count()}");
-        return drivers;
+        _logger.LogInformation($"retrieve all drivers successfully and their count are : {sortedDrivers.Count()}");
+        return sortedDrivers;
         
     }
 

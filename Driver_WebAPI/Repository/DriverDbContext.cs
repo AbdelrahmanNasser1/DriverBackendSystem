@@ -7,12 +7,13 @@ namespace Driver_WebAPI.Repository;
 /// <summary>
 /// Our Driver Context
 /// </summary>
-public class DriverDbContext
+public class DriverDbContext :IDisposable
 {
     private readonly SqliteConnection _dbConnection;
-
-    public DriverDbContext(string connectionString)
+    private readonly string _scriptPath;
+    public DriverDbContext(string connectionString, string scriptPath)
     {
+        _scriptPath = scriptPath;
         Batteries.Init();
         _dbConnection = new SqliteConnection(connectionString);
         _dbConnection.Open();
@@ -52,7 +53,8 @@ public class DriverDbContext
     /// </summary>
     private void CreateDriverTable()
     {
-        var script = File.ReadAllText("Scripts/CreateTable.sql");
+        var path = Path.Combine(_scriptPath, "CreateTable.sql");
+        var script = File.ReadAllText(path);
 
         using (var command = new SqliteCommand(script, _dbConnection))
         {

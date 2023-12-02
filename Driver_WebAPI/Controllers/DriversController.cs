@@ -1,13 +1,12 @@
 ﻿using Driver_WebAPI.DTOs;
 using Driver_WebAPI.Interfaces;
-using Driver_WebAPI.Models;
 using Driver_WebAPI.Validators;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
 
-namespace DriverSolution.Controllers
+
+namespace Driver_WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
